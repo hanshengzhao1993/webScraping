@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
+// Local host
 mongoose.connect('mongodb://localhost/webscraper');
+
+// Mongo Lab 
+// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds153752.mlab.com:53752/web1234')
 
 var db = mongoose.connection;
 
@@ -12,7 +16,8 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
-  url: String
+  url: String,
+  websiteName: String
 });
 
 var Item = mongoose.model('Url', itemSchema);

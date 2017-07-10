@@ -8,9 +8,8 @@ var Item = require('./mongoDB.js');
 var app = express();
 
 app.get('/scrape', function (req, res) {
-  var listOfUrls = ["https://jobs.lever.co/nima", "https://jobs.lever.co/addepar", 'https://jobs.lever.co/hellosign', 'https://jobs.lever.co/fathomhealth', 'https://jobs.lever.co/fathom', 'https://jobs.lever.co/fat'];
-  var answers = [];
-
+  // test cases
+  // var listOfUrls = ["https://jobs.lever.co/nima", "https://jobs.lever.co/addepar", 'https://jobs.lever.co/hellosign', 'https://jobs.lever.co/fathomhealth', 'https://jobs.lever.co/fathom', 'https://jobs.lever.co/fat'];
   // Where the web scraping will be done
   // var url = "https://jobs.lever.co/nima";
 
@@ -33,7 +32,6 @@ app.get('/scrape', function (req, res) {
               }
             })
           }
-          
         }
       }
     });
