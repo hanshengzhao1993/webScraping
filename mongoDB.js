@@ -1,9 +1,20 @@
-// Retrieve
-var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/webscraper');
 
-// Connect to the db
-MongoClient.connect("mongodb://localhost:27017/webscraper", function(err, db) {
-  if(!err) {
-    console.log("We are connected");
-  }
+var db = mongoose.connection;
+
+db.on('error', function() {
+  console.log('mongoose connection error');
 });
+
+db.once('open', function() {
+  console.log('mongoose connected successfully');
+});
+
+var itemSchema = mongoose.Schema({
+  url: String
+});
+
+var Item = mongoose.model('Url', itemSchema);
+
+module.exports = Item;
