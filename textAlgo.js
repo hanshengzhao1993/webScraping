@@ -1,7 +1,7 @@
-module.export = function (number) {
+var permutationLetters = function (number) {
   var ans = [];
   var letters = 'abcdefghijklmnopqrstuvwxyz';
-  var arrayLetters = letters.split('');
+  // var arrayLetters = letters.split('');
 
   var generateNames = function (roundsToGo, playedSoFar) {
     playedSoFar = playedSoFar || [];
@@ -10,8 +10,8 @@ module.export = function (number) {
       return
     }
 
-    for(var i = 0; i< arrayLetters.length; i++){
-      var currentLetter = arrayLetters[i];
+    for(var i = 0; i< letters.length; i++){
+      var currentLetter = letters[i];
       generateNames(roundsToGo-1, playedSoFar.concat(currentLetter))
     }
   }
@@ -19,3 +19,7 @@ module.export = function (number) {
   generateNames(number)
   return ans;
 };
+
+module.exports = permutationLetters;
+
+// console.log(permutationLetters(2))
