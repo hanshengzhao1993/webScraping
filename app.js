@@ -22,7 +22,8 @@ app.get('/scrape', function (req, res) {
         if(response.statusCode === 200){
           if($('body').text().includes('Francisco')){
             var obj = new Item({
-              url : url
+              url : url,
+              websiteName: url.slice(22)
             })
             obj.save(function (err, data) {
               if(err){
