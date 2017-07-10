@@ -2,7 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var insert = require('mongoDB');
+var Item = require('./mongoDB.js');
 
 // init app
 var app = express();
@@ -19,6 +19,27 @@ app.get('/scape', function (req, res) {
       if(!error){
         // console.log(html.includes('San Francisco'), html.includes('Software'))
         var $ = cheerio.load(html);
+        if(response.statusCode === 200){
+          if($('body').text().includes('Francisco')){
+            var obj = new Item({
+              url : url
+            })
+            obj.save(function (err) {
+              if(err){
+                throw err;
+              } else {
+                console.log('Url added')
+              }
+            })
+            // Item.insert(obj);
+            // var currentUrl = new Item(obj);
+            // currentUrl.save(function (err, currentUrl) {
+            //   if(err) {
+            //     console.error(err);
+            //   } 
+            // })
+          }
+        }
         console.log('THIS IS THE RESPONSE: ', response.statusCode)
         console.log(`THIS IS THE URL: ${url}`, $('body').text());
         // console.log('What is the dollar sign: ',$)
