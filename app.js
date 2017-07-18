@@ -12,19 +12,21 @@ var app = express();
 
 app.get('/scrape', function (req, res) {
   // test cases
-  var listOfUrls = ["https://jobs.lever.co/nima", "https://jobs.lever.co/addepar", 'https://jobs.lever.co/hellosign', 'https://jobs.lever.co/fathomhealth', 'https://jobs.lever.co/fathom', 'https://jobs.lever.co/fat'];
+  // var listOfUrls = ["https://jobs.lever.co/nima", "https://jobs.lever.co/addepar", 'https://jobs.lever.co/hellosign', 'https://jobs.lever.co/fathomhealth', 'https://jobs.lever.co/fathom', 'https://jobs.lever.co/fat'];
   // Where the web scraping will be done
   // var url = "https://jobs.lever.co/nima";
-  // var listOfUrls = lettersPermutation(4);
+  var listOfUrls = lettersPermutation(4).slice(0,100000);
 
-  listOfUrls.forEach(function (newUrl) {
-    // var newUrl = `https://jobs.lever.co/${url.join('')}`;
+  listOfUrls.forEach(function (url) {
+    var newUrl = `https://jobs.lever.co/${url.join('')}`;
     console.log(newUrl)
     request(newUrl, function (error, response, html) {
       if(!error){
-        // console.log(html.includes('San Francisco'), html.includes('Software'))
+        console.log('Getting in here');
+        console.log(html.includes('San Francisco'), html.includes('Software'))
         var $ = cheerio.load(html);
         if(response.statusCode === 200){
+          console.log('GETTINg in response')
           if($('body').text().includes('Francisco')){
             var obj = new Item({
               url : newUrl,
